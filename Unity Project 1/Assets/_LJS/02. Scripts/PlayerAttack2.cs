@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour
+public class PlayerAttack2 : MonoBehaviour
 {
-    [SerializeField] private GameObject PlayerBullet1;
-    private float createTime = 0.1f;
-    private float currentCreateTime = 0.09f;
+    [SerializeField] private GameObject PlayerBullet;
+    private float createTime = 0.05f;
+    private float currentCreateTime = 0.04f;
 
     // Update is called once per frame
     void Update()
@@ -16,14 +16,14 @@ public class PlayerAttack : MonoBehaviour
             currentCreateTime += Time.deltaTime;
             if (currentCreateTime > createTime)
             {
-                Instantiate(PlayerBullet1, transform.position, Quaternion.LookRotation(transform.forward));
+                Instantiate(PlayerBullet, transform.position, Quaternion.LookRotation(transform.forward));
                 currentCreateTime = 0.0f;
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            currentCreateTime = 0.09f;
+            currentCreateTime = 0.04f;
         }
     }
 }
