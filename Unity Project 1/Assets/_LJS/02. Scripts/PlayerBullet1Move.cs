@@ -24,6 +24,10 @@ public class PlayerBullet1Move : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        else if (pos.x < 0.0f || pos.x > 1.0f)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
