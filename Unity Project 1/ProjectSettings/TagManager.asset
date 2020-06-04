@@ -4,10 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
-  - PlayerBullet1
-  - PlayerBullet2
-  - Bullet
+  - PLAYER
+  - ENEMY
+  - PLAYER_BULLET
+  - ENEMY_BULLET
   layers:
   - Default
   - TransparentFX
@@ -17,15 +17,15 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - DESTROYZONE
+  - PLAYER_OBJECT
+  - PLAYER_SECONDARY
+  - ENEMY_SMALL
+  - ENEMY_LARGE
+  - ENEMY_BOSS
+  - PLAYER_BULLET_PRIMARY
+  - PLAYER_BULLET_SECONDARY
+  - ENEMY_BULLET
   - 
   - 
   - 
