@@ -6,8 +6,7 @@ TagManager:
   tags:
   - PLAYER
   - ENEMY
-  - PLAYER_BULLET
-  - ENEMY_BULLET
+  - BULLET
   layers:
   - Default
   - TransparentFX
@@ -17,14 +16,14 @@ TagManager:
   - UI
   - 
   - 
-  - DESTROYZONE
-  - PLAYER_OBJECT
+  - PLAYER_BODY
+  - PLAYER_HITPOINT
   - PLAYER_SECONDARY
+  - PLAYER_BULLET_PRIMARY
+  - PLAYER_BULLET_SECONDARY
   - ENEMY_SMALL
   - ENEMY_LARGE
   - ENEMY_BOSS
-  - PLAYER_BULLET_PRIMARY
-  - PLAYER_BULLET_SECONDARY
   - ENEMY_BULLET
   - 
   - 

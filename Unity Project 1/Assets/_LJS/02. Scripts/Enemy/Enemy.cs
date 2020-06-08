@@ -4,28 +4,49 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // 위에서 아래로 떨어지기만 한다 (똥피하기 느낌)
-    // 충돌처리 (에너미랑 플레이어, 에너미랑 플레이어 총알)
-
-    // 낙하 속도
+    // 총알 오브젝트를 담을 변수
+    public GameObject bulletObject;
+    // 목표물 오브젝트를 담을 변수
+    public GameObject target;
+    // 총알 발사 간격
+    public float fireTime = 1.0f;
+    // 총알 발사 간격 누적 시간
+    float currentTime = 0.0f;
+    // 최대 총알 갯수
+    public int bulletMax = 10;
+    // 적 이동 속도
     public float speed = 10.0f;
 
     // Update is called once per frame
     void Update()
     {
-        // 적 이동
-        transform.Translate(Vector3.down * speed * Time.deltaTime);
+        // 스폰된 적이 아래로 지속 이동
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
+        // 총알 자동 발사
+        AutoFire();
     }
 
-    // 충돌 시 오브젝트 없애기
-    private void OnTriggerEnter(Collider other)
+    void AutoFire()
     {
-        if (other.gameObject.tag == "PLAYER" && other.gameObject.layer == 8)
+        //타겟이 없을때 에러발생하니 예외처리
+        if (target != null)
         {
-            // 자기 자신과 충돌한 오브젝트를 동시에 없애기
-            // Destroy(gameObject, 1.0f);   //1초후에 오브젝트 삭제
-            Destroy(gameObject);
-            Destroy(other.gameObject);
+            currentTime += Time.deltaTime;
+            if (currentTime > fireTime)
+            {
+                //총알공장에서 총알생성
+                GameObject bullet = Instantiate(bulletObject);
+                //총알생성 위치
+                bullet.transform.position = transform.position;
+                //플레이어를 향하는 방향 구하기 (벡터의 뺄셈)
+                Vector3 dir = target.transform.position - transform.position;
+                dir.Normalize();
+                //총구의 방향도 맞춰준다(이게 중요함)
+                bullet.transform.forward = dir;
+                //타이머 초기화
+                currentTime = 0.0f;
+            }
         }
     }
 }
