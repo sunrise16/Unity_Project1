@@ -126,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletObject: {fileID: 1726098993495688776, guid: 556d81de91d66e746bed06912215ec81,
     type: 3}
-  target: {fileID: 1574118544859902864, guid: 76cfc5689fd0120469be69927d64d0e2, type: 3}
+  target: {fileID: 2881293580799028578, guid: 76cfc5689fd0120469be69927d64d0e2, type: 3}
   fireTime: 1
   bulletMax: 10
   speed: 10

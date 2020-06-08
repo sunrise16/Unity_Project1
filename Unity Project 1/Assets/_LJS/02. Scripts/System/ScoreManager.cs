@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-// using TMPro;
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class ScoreManager : MonoBehaviour
 
     public Text scoreTxt;
     public Text highScoreTxt;
-    // public TextMeshProUGUI textTxt;
+    public TextMeshProUGUI textTxt;
 
 
     int score = 0;

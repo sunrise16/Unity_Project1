@@ -40,7 +40,7 @@ public class Boss : MonoBehaviour
                 Vector3 dir = target.transform.position - transform.position;
                 dir.Normalize();
                 //총구의 방향도 맞춰준다(이게 중요함)
-                bullet.transform.forward = dir;
+                bullet.transform.up = dir;
                 //타이머 초기화
                 curTime = 0.0f;
             }
