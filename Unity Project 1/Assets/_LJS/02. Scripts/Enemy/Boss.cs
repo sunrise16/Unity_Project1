@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-    //보스 총알발사 (총알패턴)
-    //1. 플레이어를 향해서 총알발사
-    //2. 회전총알 발사
-
     public GameObject bulletFactory;        //총알 프리팹
     public GameObject target;               //플레이어 타겟
     public float fireTime = 1.0f;             //1초에 한번씩 총알발사  

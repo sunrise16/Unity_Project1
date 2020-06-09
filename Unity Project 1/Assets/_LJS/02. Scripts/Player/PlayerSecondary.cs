@@ -5,25 +5,26 @@ using UnityEngine;
 
 public class PlayerSecondary : MonoBehaviour
 {
+    // 보조무기 오브젝트를 담을 변수
     public GameObject secondary;
+    // 총알 오브젝트를 담을 변수
     public GameObject bulletObject;
+    // 총알 발사 간격
     public float fireTime = 1.0f;
+    // 총알 발사 간격 딜레이 누적값
     float currentTime = 0.0f;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
-        CreateClone();
+        // 보조무기 활성화
+        ActiveSecondary();
+        // 보조무기 총알 자동 발사
         AutoFire();
     }
 
-    private void CreateClone()
+    // 보조무기 활성화 함수
+    private void ActiveSecondary()
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -31,7 +32,7 @@ public class PlayerSecondary : MonoBehaviour
         }
     }
 
-    // 총알 자동 발사 함수
+    // 보조무기 총알 자동 발사 함수
     private void AutoFire()
     {
         // 보조무기가 액티브 상태일 때 총알 자동 발사 처리
@@ -41,15 +42,15 @@ public class PlayerSecondary : MonoBehaviour
             currentTime += Time.deltaTime;
             if(currentTime > fireTime)
             {
-                //당연히 curTime 0으로 초기화
+                // 자동 발사 간격 누적값 초기화
                 currentTime = 0.0f;
 
-                //GameObject bullet1 = Instantiate(bulletFactory);
-                //bullet1.transform.position = GameObject.Find("Sub1").transform.position;
-                //bullet1.transform.position = clone.transform.Find("Sub1").position;
-                //bullet1.transform.position = clone.transform.GetChild(0).position;
+                // GameObject bullet1 = Instantiate(bulletFactory);
+                // bullet1.transform.position = GameObject.Find("Sub1").transform.position;
+                // bullet1.transform.position = clone.transform.Find("Sub1").position;
+                // bullet1.transform.position = clone.transform.GetChild(0).position;
 
-                //GameObject[] bullet = new GameObject[2];
+                // GameObject[] bullet = new GameObject[2];
                 GameObject[] bullet = new GameObject[secondary.transform.childCount];
                 for(int i = 0; i < secondary.transform.childCount; i++)
                 {

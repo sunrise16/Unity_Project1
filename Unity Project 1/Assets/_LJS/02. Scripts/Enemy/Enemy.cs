@@ -6,8 +6,8 @@ public class Enemy : MonoBehaviour
 {
     // 총알 오브젝트를 담을 변수
     public GameObject bulletObject;
-    // 목표물 오브젝트를 담을 변수
-    public GameObject target;
+    // 목표물 오브젝트의 위치를 담을 변수
+    private Transform target;
     // 총알 발사 간격
     public float fireTime = 1.0f;
     // 총알 발사 간격 누적 시간
@@ -16,6 +16,12 @@ public class Enemy : MonoBehaviour
     public int bulletMax = 10;
     // 적 이동 속도
     public float speed = 10.0f;
+
+    void Start()
+    {
+        // 타겟의 위치 찾기
+        target = GameObject.Find("Player").transform;
+    }
 
     // Update is called once per frame
     void Update()
@@ -40,7 +46,7 @@ public class Enemy : MonoBehaviour
                 //총알생성 위치
                 bullet.transform.position = transform.position;
                 //플레이어를 향하는 방향 구하기 (벡터의 뺄셈)
-                Vector3 dir = target.transform.position - transform.position;
+                Vector3 dir = target.position - transform.position;
                 dir.Normalize();
                 //총구의 방향도 맞춰준다(이게 중요함)
                 bullet.transform.up = dir;

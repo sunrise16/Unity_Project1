@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ScoreManager : MonoBehaviour
+public class ScoreMgr : MonoBehaviour
 {
     // 스코어 매니저 싱글톤 제작
-    public static ScoreManager instance;
+    public static ScoreMgr instance;
     private void Awake() => instance = this;
 
     public Text scoreTxt;
