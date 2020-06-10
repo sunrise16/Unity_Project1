@@ -10,9 +10,6 @@ public class DestoryZone1 : MonoBehaviour
         // 총알 탐지
         if (coll.gameObject.tag == "BULLET_D1")
         {
-            // 트리거에 감지된 오브젝트 제거
-            // Destroy(other.gameObject);
-
             // 1. 배열 사용 시
             // if (other.gameObject.name.Contains("Bullet"))
             // {
@@ -30,17 +27,18 @@ public class DestoryZone1 : MonoBehaviour
 
             // 3. 큐 사용 시 (레이어로 충돌체 찾기)
             // if (other.gameObject.name.Contains("Bullet"))
+
+            // 플레이어 총알 제거
             if (coll.gameObject.layer == LayerMask.NameToLayer("PLAYER_BULLET_PRIMARY"))
             {
                 coll.gameObject.SetActive(false);
                 // 플레이어 오브젝트의 PlayerFire 컴포넌트의 리스트 오브젝트 풀 속성 추가
                 GameObject.Find("Player").GetComponent<PlayerFirePrimary>().bulletPool.Enqueue(coll.gameObject);
             }
-
-            switch (coll.gameObject.layer)
+            // 적 총알 제거
+            else if (coll.gameObject.layer == LayerMask.NameToLayer("ENEMY_BULLET"))
             {
-                case 8:
-                    break;
+                Destroy(coll.gameObject);
             }
         }
     }

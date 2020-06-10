@@ -7,7 +7,7 @@ public class PlayerFirePrimary : MonoBehaviour
     // 총알 오브젝트를 담을 변수
     public GameObject bulletObject;
     // 총알 발사 위치를 담을 변수
-    public GameObject firePoint;
+    public GameObject[] firePoint;
 
     // 사운드 재생
     AudioSource audio;
@@ -19,7 +19,7 @@ public class PlayerFirePrimary : MonoBehaviour
 
     // 오브젝트 풀링
     // 풀 최초 사이즈 설정
-    int poolSize = 20;
+    int poolSize = 100;
     // int fireIndex = 0;
     // 1. 배열
     // GameObject[] bulletPool;
@@ -126,10 +126,33 @@ public class PlayerFirePrimary : MonoBehaviour
                 // 3. 큐 오브젝트 풀링으로 총알 발사
                 if (bulletPool.Count > 0)
                 {
-                    GameObject bullet = bulletPool.Dequeue();
-                    bullet.SetActive(true);
-                    bullet.transform.position = firePoint.transform.position;
-                    bullet.transform.up = firePoint.transform.up;
+                    if (gameObject.GetComponent<PlayerInfo>().playerPower == 1.0f)
+                    {
+                        GameObject bullet = bulletPool.Dequeue();
+                        bullet.SetActive(true);
+                        bullet.transform.position = firePoint[0].transform.position;
+                        bullet.transform.up = firePoint[0].transform.up;
+                    }
+                    else if (gameObject.GetComponent<PlayerInfo>().playerPower == 2.0f)
+                    {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            GameObject bullet = bulletPool.Dequeue();
+                            bullet.SetActive(true);
+                            bullet.transform.position = firePoint[i].transform.position;
+                            bullet.transform.up = firePoint[i].transform.up;
+                        }
+                    }
+                    else if (gameObject.GetComponent<PlayerInfo>().playerPower == 3.0f)
+                    {
+                        for (int i = 0; i < 5; i++)
+                        {
+                            GameObject bullet = bulletPool.Dequeue();
+                            bullet.SetActive(true);
+                            bullet.transform.position = firePoint[i].transform.position;
+                            bullet.transform.up = firePoint[i].transform.up;
+                        }
+                    }
                 }
                 else
                 {

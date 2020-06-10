@@ -19,6 +19,16 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 저속 이동 모드
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = 3.0f;
+        }
+        else
+        {
+            speed = 8.0f;
+        }
+
         // 플레이어 이동 처리
         Move();
     }

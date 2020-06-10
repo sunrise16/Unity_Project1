@@ -6,14 +6,13 @@ using TMPro;
 
 public class ScoreMgr : MonoBehaviour
 {
-    // 스코어 매니저 싱글톤 제작
+    // 스코어 매니저 싱글톤 만들기
     public static ScoreMgr instance;
     private void Awake() => instance = this;
 
-    public Text scoreTxt;
-    public Text highScoreTxt;
-    public TextMeshProUGUI textTxt;
-
+    public Text scoreTxt;               // 일반 UI 텍스트
+    public Text highScoreTxt;           // 일반 UI 텍스트
+    public TextMeshProUGUI textTxt;     // 텍스트메시프로 텍스트
 
     int score = 0;
     int highScore = 0;
@@ -23,7 +22,7 @@ public class ScoreMgr : MonoBehaviour
     {
         // 하이 스코어 불러오기
         highScore = PlayerPrefs.GetInt("HighScore");
-        highScoreTxt.text = "HIGH SCORE : " + highScore;
+        highScoreTxt.text = "HighScore : " + highScore;
     }
 
     // Update is called once per frame
@@ -39,7 +38,7 @@ public class ScoreMgr : MonoBehaviour
         {
             highScore = score;
             PlayerPrefs.SetInt("HighScore", highScore);
-            highScoreTxt.text = "HIGH SCORE : " + highScore;
+            highScoreTxt.text = "HighScore" + highScore;
         }
     }
 
@@ -47,8 +46,8 @@ public class ScoreMgr : MonoBehaviour
     public void AddScore()
     {
         score++;
-        scoreTxt.text = "SCORE : " + score;
+        scoreTxt.text = "Score : " + score;
 
-        textTxt.text = "TEST...";
+        textTxt.text = "test : " + score;
     }
 }

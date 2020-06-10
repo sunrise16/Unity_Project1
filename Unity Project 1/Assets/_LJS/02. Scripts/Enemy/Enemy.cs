@@ -16,11 +16,17 @@ public class Enemy : MonoBehaviour
     public int bulletMax = 10;
     // 적 이동 속도
     public float speed = 10.0f;
+    // 적의 체력
+    public float enemyInitHP;
+    public float enemyCurrentHP;
 
     void Start()
     {
         // 타겟의 위치 찾기
         target = GameObject.Find("Player").transform;
+
+        // 적의 체력 초기화
+        enemyCurrentHP = enemyInitHP;
     }
 
     // Update is called once per frame

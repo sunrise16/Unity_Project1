@@ -126,10 +126,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletObject: {fileID: 1726098993495688776, guid: 556d81de91d66e746bed06912215ec81,
     type: 3}
-  target: {fileID: 2881293580799028578, guid: 76cfc5689fd0120469be69927d64d0e2, type: 3}
   fireTime: 1
   bulletMax: 10
   speed: 10
+  enemyInitHP: 30
+  enemyCurrentHP: 0
 --- !u!114 &-5733271728059427704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,4 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07eb363bee0e3d04b9013bb4062729e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 6934409190377419788}
+  fxObject: {fileID: 100006, guid: e076683e0305e35498b8e8834978c0fa, type: 3}
