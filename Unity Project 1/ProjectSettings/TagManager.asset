@@ -8,6 +8,7 @@ TagManager:
   - ENEMY
   - BULLET_D1
   - BULLET_D2
+  - BORDER
   layers:
   - Default
   - TransparentFX
@@ -37,10 +38,10 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - BORDER_LEFT
+  - BORDER_RIGHT
+  - BORDER_TOP
+  - BORDER_BOTTOM
   m_SortingLayers:
   - name: Default
     uniqueID: 0

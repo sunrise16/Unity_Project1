@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/_LJS/01. Scenes/TitleMenu.unity
     guid: 2a98fe072f4e4e742ab5924cd3aadb20
   - enabled: 1
-    path: Assets/_LJS/01. Scenes/Play.unity
+    path: Assets/_LJS/01. Scenes/Stage1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/_LJS/01. Scenes/Stage1.unity

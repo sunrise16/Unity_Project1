@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerFirePrimary : MonoBehaviour
 {
+    // 플레이어 정보를 저장할 변수
+    private PlayerInfo playerInfo;
     // 총알 오브젝트를 담을 변수
     public GameObject bulletObject;
     // 총알 부모 오브젝트를 담을 변수
@@ -33,6 +35,9 @@ public class PlayerFirePrimary : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // 플레이어 오브젝트 찾기
+        playerInfo = GameObject.Find("Player").GetComponent<PlayerInfo>();
+
         // 오디오 소스 컴포넌트 캐스팅
         audio = GetComponent<AudioSource>();
 
@@ -77,8 +82,11 @@ public class PlayerFirePrimary : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 메인 샷 발사
-        PrimaryShot();
+        if (playerInfo.playerState == PlayerInfo.PlayerState.PLAYER_ALIVE)
+        {
+            // 메인 샷 발사
+            PrimaryShot();
+        }
     }
 
     // 메인 샷 발사 함수

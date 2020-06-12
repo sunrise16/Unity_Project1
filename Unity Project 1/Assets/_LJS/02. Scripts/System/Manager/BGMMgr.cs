@@ -149,4 +149,16 @@ public class BGMMgr : MonoBehaviour
     {
         audioMain.Play();
     }
+
+    public bool IsPlaying()
+    {
+        if (audioMain.isPlaying)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

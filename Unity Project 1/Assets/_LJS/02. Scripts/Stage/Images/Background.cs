@@ -30,5 +30,11 @@ public class Background : MonoBehaviour
         Vector2 offset = mat.mainTextureOffset;
         offset.Set(0, offset.y + (scrollSpeed * Time.deltaTime));
         mat.mainTextureOffset = offset;
+
+        if (offset.y >= 1.0f)
+        {
+            offset.Set(0, offset.y -1.0f);
+            mat.mainTextureOffset = offset;
+        }
     }
 }

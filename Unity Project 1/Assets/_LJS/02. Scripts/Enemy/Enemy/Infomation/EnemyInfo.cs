@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class EnemyInfo : MonoBehaviour
 {
-    // 적 이동 속도
-    public float speed = 10.0f;
+    // 적 기체의 현재 생존 상태
+    public enum EnemyState { ENEMY_ALIVE, ENEMY_DEAD }
+
     // 적의 체력
     public float enemyInitHP;
     public float enemyCurrentHP;
+    // 적의 현재 상태
+    public EnemyState enemyState;
 
     void Start()
     {
-        // 적의 체력 초기화
         enemyCurrentHP = enemyInitHP;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // 스폰된 적이 아래로 지속 이동
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        enemyState = EnemyState.ENEMY_ALIVE;
     }
 }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    // 플레이어 정보를 저장할 변수
+    private PlayerInfo playerInfo;
+
     // 플레이어 이동 속도
     public float speed = 8.0f;
     // Viewport 좌표 (0.0f ~ 1.0f 사이값)
@@ -12,25 +15,31 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // 플레이어 오브젝트 찾기
+        playerInfo = GameObject.Find("Player").GetComponent<PlayerInfo>();
+
         // 마진값 설정
-        margin = new Vector2(0.08f, 0.05f);
+        margin = new Vector2(0.1f, 0.3f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // 저속 이동 모드
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (playerInfo.playerState == PlayerInfo.PlayerState.PLAYER_ALIVE)
         {
-            speed = 3.0f;
-        }
-        else
-        {
-            speed = 8.0f;
-        }
+            // 저속 이동 모드
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                speed = 3.0f;
+            }
+            else
+            {
+                speed = 8.0f;
+            }
 
-        // 플레이어 이동 처리
-        Move();
+            // 플레이어 이동 처리
+            Move();
+        }
     }
 
     // 플레이어 이동 함수
@@ -72,7 +81,7 @@ public class PlayerMove : MonoBehaviour
         // position.x = Mathf.Clamp(position.x, 0.0f, 1.0f);
         // position.y = Mathf.Clamp(position.y, 0.0f, 1.0f);
         position.x = Mathf.Clamp(position.x, 0.0f + margin.x, 1.0f - margin.x);
-        position.y = Mathf.Clamp(position.y, 0.0f + margin.y, 1.0f - margin.y);
+        position.y = Mathf.Clamp(position.y, -0.05f + margin.y, 1.15f - margin.y);
         transform.position = Camera.main.ViewportToWorldPoint(position);
     }
 }

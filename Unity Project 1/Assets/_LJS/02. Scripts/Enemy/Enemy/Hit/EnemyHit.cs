@@ -19,6 +19,11 @@ public class EnemyHit : MonoBehaviour
         enemyObject = gameObject.GetComponent<EnemyInfo>();
     }
 
+    void Update()
+    {
+        // EnemyDead();
+    }
+
     private void OnTriggerEnter(Collider coll)
     {
         // 플레이어 총알과 충돌했을 경우
@@ -31,19 +36,23 @@ public class EnemyHit : MonoBehaviour
                 // 플레이어 오브젝트의 PlayerFire 컴포넌트의 리스트 오브젝트 풀 속성 추가
                 GameObject.Find("Player").GetComponent<PlayerFirePrimary>().bulletPool.Enqueue(coll.gameObject);
             }
+            // 적 체력 감소
             enemyObject.enemyCurrentHP -= 5;
+            // 적 히트 시 점수 추가
+            ScoreMgr.instance.AddScore(10);
             // 체력이 0이 되었을 경우 오브젝트 제거
             if (enemyObject.enemyCurrentHP <= 0)
             {
                 // 사운드 출력
                 audio.clip = audioClip[0];
                 audio.Play();
-
-                Destroy(gameObject);
                 // 폭발 이펙트 출력
                 ShowEffect();
-                // 점수 추가
-                ScoreMgr.instance.AddScore();
+                // 적 처리 시 점수 추가
+                ScoreMgr.instance.AddScore(990);
+                // 오브젝트 풀 갱신
+                gameObject.SetActive(false);
+                GameObject.Find("EnemyManager").GetComponent<EnemyManager>().enemyPool.Enqueue(gameObject);
             }
         }
     }

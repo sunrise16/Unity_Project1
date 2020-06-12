@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class EnemyFire : MonoBehaviour
 {
-    // 총알 오브젝트를 담을 변수
-    public GameObject bulletObject;
-    // 총알 부모 오브젝트를 담을 변수
-    private Transform bulletParent;
+    // 총알을 꺼내올 오브젝트 풀을 담을 변수
+    private BulletMgr bulletManager;
     // 목표물 오브젝트의 위치를 담을 변수
     private Transform target;
     // 사운드 정보를 담을 변수
@@ -26,8 +24,8 @@ public class EnemyFire : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // 부모 오브젝트 찾기
-        bulletParent = GameObject.Find("EnemyBullet").transform;
+        // 오브젝트 풀 찾기
+        bulletManager = GameObject.Find("BulletManager").GetComponent<BulletMgr>();
 
         // 타겟의 위치 찾기
         target = GameObject.Find("Player").transform;
@@ -39,6 +37,14 @@ public class EnemyFire : MonoBehaviour
     void Update()
     {
         Fire();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "BORDER" && other.gameObject.layer == LayerMask.NameToLayer("BORDER_BOTTOM"))
+        {
+            target = null;
+        }
     }
 
     void Fire()
@@ -55,17 +61,30 @@ public class EnemyFire : MonoBehaviour
                     audio.clip = audioClip[0];
                     audio.Play();
 
-                    // 총알 생성
-                    GameObject bullet = Instantiate(bulletObject);
-                    bullet.SetActive(true);
-                    bullet.transform.SetParent(bulletParent);
-                    // 총알 생성 위치
-                    bullet.transform.position = transform.position;
-                    // 플레이어를 향하는 방향 구하기 (벡터의 뺄셈)
-                    Vector3 dir = target.position - transform.position;
-                    dir.Normalize();
-                    // 총구의 방향 맞춰주기
-                    bullet.transform.up = dir;
+                    if (bulletManager.bulletPool.Count > 0)
+                    {
+                        GameObject bullet = bulletManager.bulletPool.Dequeue();
+                        bullet.SetActive(true);
+                        bullet.transform.position = transform.position;
+                        // 플레이어를 향하는 방향 구하기 (벡터의 뺄셈)
+                        Vector3 dir = target.position - transform.position;
+                        dir.Normalize();
+                        // 총구의 방향 맞춰주기
+                        bullet.transform.up = dir;
+                    }
+                    else
+                    {
+                        GameObject bullet = Instantiate(bulletManager.bulletObject);
+                        bullet.SetActive(false);
+                        bullet.transform.SetParent(bulletManager.bulletParent.transform);
+                        bulletManager.bulletPool.Enqueue(bullet);
+                        // 플레이어를 향하는 방향 구하기 (벡터의 뺄셈)
+                        Vector3 dir = target.position - transform.position;
+                        dir.Normalize();
+                        // 총구의 방향 맞춰주기
+                        bullet.transform.up = dir;
+                    }
+
                     // 타이머 초기화
                     currentTime = 0.0f;
                     // 총알 현재 갯수 증가

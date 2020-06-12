@@ -10,19 +10,21 @@ public class ScoreMgr : MonoBehaviour
     public static ScoreMgr instance;
     private void Awake() => instance = this;
 
-    public Text scoreTxt;               // 일반 UI 텍스트
-    public Text highScoreTxt;           // 일반 UI 텍스트
-    public TextMeshProUGUI textTxt;     // 텍스트메시프로 텍스트
+    public TextMeshProUGUI scoreTxt;
+    public TextMeshProUGUI highScoreTxt;
+    public TextMeshProUGUI deadCountTxt;
+    // public TextMeshProUGUI textTxt;
 
     int score = 0;
     int highScore = 0;
+    int deadCount = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         // 하이 스코어 불러오기
-        highScore = PlayerPrefs.GetInt("HighScore");
-        highScoreTxt.text = "HighScore : " + highScore;
+        highScore = PlayerPrefs.GetInt("HIGH SCORE");
+        highScoreTxt.text = "" + highScore;
     }
 
     // Update is called once per frame
@@ -37,17 +39,22 @@ public class ScoreMgr : MonoBehaviour
         if (score > highScore)
         {
             highScore = score;
-            PlayerPrefs.SetInt("HighScore", highScore);
-            highScoreTxt.text = "HighScore" + highScore;
+            PlayerPrefs.SetInt("HIGH SCORE", highScore);
+            highScoreTxt.text = "" + highScore;
         }
     }
 
     // 점수 추가 및 텍스트 업데이트
-    public void AddScore()
+    public void AddScore(int value)
     {
-        score++;
-        scoreTxt.text = "Score : " + score;
+        score += value;
+        scoreTxt.text = "" + score;
+    }
 
-        textTxt.text = "test : " + score;
+    // 죽은 횟수 추가 및 텍스트 업데이트
+    public void AddDeadCount()
+    {
+        deadCount++;
+        deadCountTxt.text = "" + deadCount;
     }
 }
